@@ -1,0 +1,14 @@
+sylius_resource:
+  resources:
+    bitbag_sylius_catalog_plugin.catalog:
+      driver: doctrine/orm
+      classes:
+        model: BitBag\SyliusCatalogPlugin\Entity\Catalog
+        repository: BitBag\SyliusCatalogPlugin\Repository\CatalogRepository
+        interface: BitBag\SyliusCatalogPlugin\Entity\CatalogInterface
+        form: BitBag\SyliusCatalogPlugin\Form\Type\CatalogType
+      translation:
+        classes:
+          model: BitBag\SyliusCatalogPlugin\Entity\CatalogTranslation
+          interface: BitBag\SyliusCatalogPlugin\Entity\CatalogTranslationInterface
+          form: BitBag\SyliusCatalogPlugin\Form\Type\Translation\CatalogTranslationType

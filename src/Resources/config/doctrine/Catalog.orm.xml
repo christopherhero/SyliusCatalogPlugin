@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping
+        xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <entity name="BitBag\SyliusCatalogPlugin\Entity\Catalog" table="bitbag_catalog_catalog">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="startDate" column="start_date" type="datetime" nullable="true"/>
+        <field name="endDate" column="end_date" type="datetime" nullable="true"/>
+        <field name="code" column="code" type="string" nullable="true"/>
+        <field name="connectingRules" column="connecting_rules" type="string" />
+        <field name="productAssociationConnectingRules" column="product_connecting_rules" type="string" />
+        <one-to-many field="rules" target-entity="\BitBag\SyliusCatalogPlugin\Entity\CatalogRule" mapped-by="catalog" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+        <one-to-many field="productAssociationRules" target-entity="BitBag\SyliusCatalogPlugin\Entity\ProductAssociationRule" mapped-by="catalog" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,10 @@
+<div class="bitbag-block">
+
+    <h3>{{ catalog.name }}</h3>
+    <div class="ui three odd doubling cards">
+        {% for product in products %}
+            {% include '@SyliusShop/Product/_box.html.twig' %}
+        {% endfor %}
+    </div>
+
+</div>

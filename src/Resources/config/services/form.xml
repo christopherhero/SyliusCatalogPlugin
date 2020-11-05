@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="bitbag_sylius_catalog_plugin.form.type.catalog.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="bitbag_sylius_catalog_plugin.form.type.catalog_rule.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="bitbag_sylius_catalog_plugin.form.type.catalog_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="bitbag_sylius_catalog_plugin.form.type.catalog_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+    </parameters>
+    <services>
+        <defaults public="true" />
+
+        <service id="bitbag_sylius_catalog_plugin.form.type.catalog" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogType">
+            <argument>%bitbag_sylius_catalog_plugin.model.catalog.class%</argument>
+            <argument>%bitbag_sylius_catalog_plugin.form.type.catalog.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.catalog_rule" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogRuleType">
+            <argument>%bitbag_sylius_catalog_plugin.model.catalog_rule.class%</argument>
+            <argument>%bitbag_sylius_catalog_plugin.form.type.catalog_rule.validation_groups%</argument>
+            <argument type="service" id="bitbag_sylius_catalog_plugin.form_registry.catalog_rule_checker" />
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.translation.catalog" class="BitBag\SyliusCatalogPlugin\Form\Type\Translation\CatalogTranslationType">
+            <argument>%bitbag_sylius_catalog_plugin.model.catalog_translation.class%</argument>
+            <argument>%bitbag_sylius_catalog_plugin.form.type.catalog_translation.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.catalog_rule.collection" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogRuleCollectionType">
+            <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_rule_checker" />
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.catalog_rule.choice" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogRuleChoiceType">
+            <argument>%bitbag_sylius_catalog_plugin.catalog_rules%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.channel_pricing" class="BitBag\SyliusCatalogPlugin\Form\Type\ChannelBasedRulePricing">
+            <argument>%bitbag_sylius_catalog_plugin.catalog_rules%</argument>
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.product_association_rule" class="BitBag\SyliusCatalogPlugin\Form\Type\ProductAssociationRuleType">
+            <argument>%bitbag_sylius_catalog_plugin.model.product_association_rule.class%</argument>
+            <argument type="collection"></argument>
+            <argument type="service" id="bitbag_sylius_catalog_plugin.form_registry.catalog_rule_checker" />
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.product_association_rule.collection" class="BitBag\SyliusCatalogPlugin\Form\Type\ProductAssociationRuleCollectionType">
+            <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_rule_checker" />
+            <tag name="form.type" />
+        </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.product_association_rule.choice" class="BitBag\SyliusCatalogPlugin\Form\Type\ProductAssociationRuleChoiceType">
+            <argument>%bitbag_sylius_catalog_plugin.product_association_rules%</argument>
+            <tag name="form.type" />
+        </service>
+
+
+    </services>
+</container>
