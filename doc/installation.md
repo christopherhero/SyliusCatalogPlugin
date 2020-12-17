@@ -1,6 +1,6 @@
 ## Installation
 ```bash
-$ composer require bitbag/cms-plugin
+$ composer require bitbag/catalog-plugin
 ```
 
 Add plugin dependencies to your `config/bundles.php` file:
