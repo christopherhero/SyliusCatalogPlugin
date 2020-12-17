@@ -3,11 +3,6 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true" />
-
-<!--        <service id="" class="Tests\BitBag\SyliusElasticsearchPlugin\Behat\Context\Ui\Shop\ProductContext">-->
-<!--            <argument type="service" id="bitbag.sylius_elasticsearch_plugin.behat.context.page.shop.product.index" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
                 <service id="bitbag_sylius_catalog_plugin.behat.context.ui.admin.catalog_context" class="Tests\BitBag\SyliusCatalogPlugin\Behat\Context\Ui\Admin\CatalogContext">
                     <argument type="service" id="sylius.behat.shared_storage" />
                     <argument type="service" id="sylius.behat.current_page_resolver" />
