@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Acme\SyliusExamplePlugin\Entity\Catalog;
 
 class Catalog implements CatalogInterface
 {
-    private  $id;
+    private $id;
 
     private $name;
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+<entity name="BitBag\SyliusCatalogPlugin\Entity\AbstractCatalogRule" table="bitbag_catalog_rule" inheritance-type="SINGLE_TABLE">
+    <discriminator-column name="target" type="string" />
+    <discriminator-map>
+        <discriminator-mapping value="catalog" class="BitBag\SyliusCatalogPlugin\Entity\CatalogRule" />
+        <discriminator-mapping value="product_association" class="BitBag\SyliusCatalogPlugin\Entity\ProductAssociationRule" />
+    </discriminator-map>
+
+    <id name="id" type="integer">
+        <generator strategy="AUTO" />
+    </id>
+
+    <field name="type" column="type" type="string" nullable="true" />
+    <field name="configuration" column="configuration" type="array" />
+</entity>
+</doctrine-mapping>
