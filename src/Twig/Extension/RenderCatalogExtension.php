@@ -29,9 +29,11 @@ final class RenderCatalogExtension extends AbstractExtension
     /** @var ProductResolverInterface */
     private $productResolver;
 
-    public function __construct(EngineInterface $engine, CatalogResourceResolverInterface $catalogResolver,
-                                ProductResolverInterface $productResolver)
-    {
+    public function __construct(
+        EngineInterface $engine, 
+        CatalogResourceResolverInterface $catalogResolver,
+        ProductResolverInterface $productResolver
+    ) {
         $this->productResolver = $productResolver;
         $this->engine = $engine;
         $this->catalogResolver = $catalogResolver;
@@ -50,7 +52,7 @@ final class RenderCatalogExtension extends AbstractExtension
         $catalog = $this->catalogResolver->findOrLog($code);
         $products = [];
 
-        if ($catalog) {
+        if (null !== $catalog) {
             $products = $this->productResolver->findMatchingProducts($catalog);
         }
 

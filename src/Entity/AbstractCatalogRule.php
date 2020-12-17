@@ -28,7 +28,7 @@ abstract class AbstractCatalogRule
     /** @var string|null */
     protected $target;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->type;
     }

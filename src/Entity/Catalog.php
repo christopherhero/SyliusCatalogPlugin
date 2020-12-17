@@ -174,8 +174,10 @@ class Catalog implements CatalogInterface
 
     public function removeProductAssociationRule(ProductAssociationRuleInterface $rule): void
     {
-        $rule->setCatalog(null);
-        $this->productAssociationRules->removeElement($rule);
+        if ($this->hasProductAssociationRule($rule)) {
+            $rule->setCatalog(null);
+            $this->productAssociationRules-> removeElement($rule);
+        }
     }
 
     public function getProductAssociationConnectingRules(): ?string

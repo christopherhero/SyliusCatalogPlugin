@@ -25,9 +25,9 @@ class ChannelBasedRulePricing extends AbstractType
             'entry_type' => ItemTotalConfigurationType::class,
             'entry_options' => function (ChannelInterface $channel) {
                 return [
-                'label' => $channel->getCode(),
-                'currency' => $channel->getBaseCurrency()->getCode(),
-            ];
+                    'label' => $channel->getCode(),
+                    'currency' => $channel->getBaseCurrency()->getCode(),
+                ];
             },
         ]);
     }
