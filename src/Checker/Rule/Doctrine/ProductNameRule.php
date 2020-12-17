@@ -40,7 +40,7 @@ final class ProductNameRule extends AbstractRule
         } else {
             $queryBuilder
                 ->andWhere('name.name like :' . $parameterName)
-                ->andWhere('name.locale =:locale');
+                ->andWhere('name.locale = :locale');
         }
 
         $queryBuilder
