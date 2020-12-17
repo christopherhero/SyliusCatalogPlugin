@@ -39,12 +39,15 @@ class ProductResolver implements ProductResolverInterface
         $rules = $catalog->getRules();
 
         $qb = $this->productRepository->createQueryBuilder('p')
+            ->addSelect('min(price) AS HIDDEN min_price')
+            ->addSelect('max(price) AS HIDDEN max_price')
+            ->addGroupBy('p, name, variant, productTaxon, taxon')
             ->leftJoin('p.translations', 'name')
             ->leftJoin('p.variants', 'variant')
             ->leftJoin('p.productTaxons', 'productTaxon')
             ->leftJoin('productTaxon.taxon', 'taxon')
             ->leftJoin('variant.channelPricings', 'price');
-
+        ;
         foreach ($rules as $rule) {
             $type = $rule->getType();
 

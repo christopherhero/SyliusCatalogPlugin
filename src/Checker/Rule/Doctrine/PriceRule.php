@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class PriceRule extends AbstractRule
 {
@@ -39,10 +40,11 @@ final class PriceRule extends AbstractRule
         /** @var string|null $currentChannel */
         $currentChannel = $this->channelContext->getChannel()->getCode();
 
+
         $this->addRule(
             $connectingRules,
             $queryBuilder,
-            $this->createFromFromOperator($configuration['price'], $queryBuilder, $channelCodeParameter, $priceParameter)
+            $this->createFromFromOperator($configuration['operator'], $queryBuilder, $channelCodeParameter, $priceParameter)
         );
 
         $queryBuilder
@@ -74,11 +76,11 @@ final class PriceRule extends AbstractRule
     {
         $subquery = $queryBuilder->getEntityManager()->createQueryBuilder()
             ->select('cp.price')
-            ->from(ProductVariant::class, 'pv')
+            ->from(ProductVariantInterface::class, 'pv')
             ->join('pv.channelPricings', 'cp')
             ->where('pv.product = p')
-            ->andWhere('cp.channelCode = :' . $channelCodeParameter)
-            ->andWhere("cp.price {$subqueryOperator} :" . $priceParameter)
+            ->andWhere(sprintf('cp.channelCode = :%s',$channelCodeParameter))
+            ->andWhere(sprintf("cp.price %s :%s",$subqueryOperator, $priceParameter))
             ->getQuery();
 
         return $queryBuilder->expr()
@@ -106,6 +108,6 @@ final class PriceRule extends AbstractRule
                 return $this->anyVariantRule($queryBuilder, $channelCodeParameter, '<=', $priceParameter);
         }
 
-        throw new InvalidArgumentException('Unkown operator');
+        throw new InvalidArgumentException('Unknown operator');
     }
 }

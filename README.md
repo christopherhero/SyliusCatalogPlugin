@@ -1,112 +1,63 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
+<h1 align="center">
+    <a href="http://bitbag.shop" target="_blank">
+        <img src="doc/logo.png" width="55%" />
     </a>
-</p>
+    <br />
+    <a href="https://packagist.org/packages/bitbag/catalog-plugin" title="License" target="_blank">
+        <img src="https://img.shields.io/packagist/l/bitbag/catalog-plugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/bitbag/catalog-plugin" title="Version" target="_blank">
+        <img src="https://img.shields.io/packagist/v/bitbag/catalog-plugin.svg" />
+    </a>
+    <a href="http://travis-ci.org/BitBagCommerce/SyliusCatalogPlugin" title="Build status" target="_blank">
+        <img src="https://img.shields.io/travis/BitBagCommerce/SyliusCatalogPlugin/master.svg" />
+    </a>
+    <a href="https://scrutinizer-ci.com/g/BitBagCommerce/SyliusCatalogPlugin/" title="Scrutinizer" target="_blank">
+        <img src="https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusCatalogPlugin.svg" />
+    </a>
+    <a href="https://packagist.org/packages/bitbag/catalog-plugin" title="Total Downloads" target="_blank">
+        <img src="https://poser.pugx.org/bitbag/catalog-plugin/downloads" />
+    </a>
+    <p>
+        <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
+    </p>
+</h1>
 
-<h1 align="center">Plugin Skeleton</h1>
+## About us
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at https://bitbag.io/.
+
+## BitBag SyliusCatalogPlugin
+
+Allows for displaying catalog with products - calculated dynamically with rules. 
+
+For catalog You can configure:
+
+ * code 
+ * names, when it should be shown
+ * when it should be shown - this is useful for time restricted special offers or promotions
+ * there is set of rules that restrict which products will be shown inside, they can be combined using AND or OR.
+ * there is another set of rules - used to restrict products associated with given catalog - it can be shown on product details page
 
 ## Documentation
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
-
-## Quickstart Installation
-
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
-
-2. From the plugin skeleton root directory, run the following commands:
-
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
-
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+- [Installation](doc/installation.md)
 
 ## Usage
 
-### Running plugin tests
+Plugin provides 2 new twig functions which can be used inside templates:
+ * for rendering catalogs by their code:
+```html
+    {{ bitbag_render_product_catalog("test_catalog") }}
+```
+ * for rendering all catalogs active for given product
+```html
+        {{ bitbag_render_product_catalogs(product) }}
+```
 
-  - PHPUnit
 
-    ```bash
-    vendor/bin/phpunit
-    ```
 
-  - PHPSpec
 
-    ```bash
-    vendor/bin/phpspec run
-    ```
+## Contribution
 
-  - Behat (non-JS scenarios)
-
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
-    ```
-
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript"
-      ```
-    
-  - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
-
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check src
-    ```
-
-### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
+Learn more about our contribution workflow on http://docs.sylius.org/en/latest/contributing/.

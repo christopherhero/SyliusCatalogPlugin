@@ -16,6 +16,7 @@ bitbag_sylius_catalog_plugin:
                 sort_by_code: By product code
                 price_higher_than: By price
                 sort_by_name: Filter by name
+                taxon: By taxons
             catalog:
                 connecting_rules: Connecting rules
                 product_association_connecting_rules: How to connect rules
@@ -41,4 +42,5 @@ bitbag_sylius_catalog_plugin:
                 product_price_greater_equal: first variant price greater or equal
                 product_price_less: first variant price smaller
                 product_price_less_equal: first variant price smaller or equal
+                taxons: Taxons
 

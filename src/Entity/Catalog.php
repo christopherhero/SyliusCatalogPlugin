@@ -159,12 +159,12 @@ class Catalog implements CatalogInterface
         return !$this->productAssociationRules->isEmpty();
     }
 
-    public function hasProductAssociationRule(CatalogRuleInterface $rule): bool
+    public function hasProductAssociationRule(ProductAssociationRuleInterface $rule): bool
     {
         return $this->productAssociationRules->contains($rule);
     }
 
-    public function addProductAssociationRule(CatalogRuleInterface $rule): void
+    public function addProductAssociationRule(ProductAssociationRuleInterface $rule): void
     {
         if (!$this->hasProductAssociationRule($rule)) {
             $rule->setCatalog($this);
@@ -172,7 +172,7 @@ class Catalog implements CatalogInterface
         }
     }
 
-    public function removeProductAssociationRule(CatalogRuleInterface $rule): void
+    public function removeProductAssociationRule(ProductAssociationRuleInterface $rule): void
     {
         $rule->setCatalog(null);
         $this->productAssociationRules->removeElement($rule);
