@@ -31,6 +31,7 @@ final class CatalogContext implements Context
 
     /** @var CatalogRepositoryInterface */
     private $catalogRepository;
+
     /** @var RandomStringGeneratorInterface */
     private $randomStringGenerator;
 
