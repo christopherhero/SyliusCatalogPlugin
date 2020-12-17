@@ -53,6 +53,8 @@ final class ProductCodeLike extends AbstractRule
                 $parameterValue = $configuration['productCodePhrase'] . '%';
 
                 break;
+            default:
+                throw new \InvalidArgumentException('Unknown operator type.');
         }
 
         $queryBuilder

@@ -60,6 +60,8 @@ final class PriceRule implements RuleInterface
                 $maxPrice = (int) $price;
 
                 break;
+            default:
+                throw new \InvalidArgumentException('Unknown operator type.');
         }
 
         $rangeQuery = new Range();

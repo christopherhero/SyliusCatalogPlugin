@@ -11,10 +11,16 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine;
 
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Comparison;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractRule implements RuleInterface
 {
+    /**
+     * @param Expr|Func|Comparison $rule
+     */
     protected function addRule(string $connectingRules, QueryBuilder $queryBuilder, $rule): void
     {
         switch ($connectingRules) {

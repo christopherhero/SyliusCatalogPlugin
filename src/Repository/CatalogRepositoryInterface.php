@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Repository;
 
-interface CatalogRepositoryInterface
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
+interface CatalogRepositoryInterface extends RepositoryInterface
 {
     /**
      * @return Catalog[]

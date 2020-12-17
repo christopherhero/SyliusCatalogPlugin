@@ -1,5 +1,4 @@
 imports:
-    - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/suites.yml
     - tests/Behat/Resources/suites.yml
 
 default:
@@ -46,7 +45,7 @@ default:
         FriendsOfBehat\SymfonyExtension:
             bootstrap: tests/Application/config/bootstrap.php
             kernel:
-                class: Tests\Acme\SyliusExamplePlugin\Application\Kernel
+                class: Tests\BitBag\SyliusCatalogPlugin\Application\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
 

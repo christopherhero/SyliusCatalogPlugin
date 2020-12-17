@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="bitbag.sylius_catalog_plugin.fixture.catalog_fixture" class="BitBag\SyliusCatalogPlugin\Fixture\CatalogFixture">
+            <argument type="service" id="bitbag.sylius_catalog_plugin.plugin.fixture.factory.catalog_fixture_factory" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="bitbag.sylius_catalog_plugin.plugin.fixture.factory.catalog_fixture_factory" class="BitBag\SyliusCatalogPlugin\Fixture\Factory\CatalogFixtureFactory">
+            <argument type="service" id="bitbag_sylius_catalog_plugin.factory.catalog" />
+            <argument type="service" id="bitbag_sylius_catalog_plugin.factory.catalog_translation" />
+            <argument type="service" id="bitbag_sylius_catalog_plugin.factory.catalog_rule" />
+            <argument type="service" id="bitbag_sylius_catalog_plugin.repository.catalog" />
+        </service>
+    </services>
+</container>

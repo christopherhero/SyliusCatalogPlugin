@@ -3,9 +3,8 @@
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
- * another great project.
- * You can find more information about us on https://bitbag.shop and write us
- * an email on mikolaj.krol@bitbag.pl.
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -14,7 +13,6 @@ namespace BitBag\SyliusCatalogPlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
@@ -30,7 +28,7 @@ class Catalog implements CatalogInterface
 
         /** @var ArrayCollection<array-key, CatalogRuleInterface> $this->rules */
         $this->rules = new ArrayCollection();
-        $this->associatedProducts = new ArrayCollection();
+        $this->productAssociationRules = new ArrayCollection();
     }
 
     /** @var int|null */
@@ -50,9 +48,6 @@ class Catalog implements CatalogInterface
 
     /** @var string|null */
     protected $connectingRules;
-
-    /** @var ProductInterface[]|Collection */
-    protected $associatedProducts;
 
     /** @var CatalogRuleInterface[]|Collection */
     protected $productAssociationRules;
@@ -152,30 +147,6 @@ class Catalog implements CatalogInterface
     protected function createTranslation(): CatalogTranslation
     {
         return new CatalogTranslation();
-    }
-
-    public function getAssociatedProducts(): Collection
-    {
-        return $this->associatedProducts;
-    }
-
-    public function hasAssociatedProduct(ProductInterface $product): bool
-    {
-        return $this->associatedProducts->contains($product);
-    }
-
-    public function addAssociatedProduct(ProductInterface $product): void
-    {
-        if (!$this->hasAssociatedProduct($product)) {
-            $this->associatedProducts->add($product);
-        }
-    }
-
-    public function removeAssociatedProduct(ProductInterface $product): void
-    {
-        if ($this->hasAssociatedProduct($product)) {
-            $this->associatedProducts->removeElement($product);
-        }
     }
 
     public function getProductAssociationRules(): Collection

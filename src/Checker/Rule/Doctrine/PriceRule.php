@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine;
 
-use App\Entity\Product\ProductVariant;
 use BitBag\SyliusCatalogPlugin\Form\Type\PriceConfigurationType;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 
 final class PriceRule extends AbstractRule
 {
@@ -55,7 +57,7 @@ final class PriceRule extends AbstractRule
         return 'productPriceHigher' . $this->i++;
     }
 
-    private function anyVariantRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): \Doctrine\ORM\Query\Expr\Func
+    private function anyVariantRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): Func
     {
         $subquery = $queryBuilder->getEntityManager()->createQueryBuilder()
             ->select('cp.price')
@@ -69,7 +71,7 @@ final class PriceRule extends AbstractRule
         return $queryBuilder->expr()->exists($subquery->getDQL());
     }
 
-    private function allVariantsRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): \Doctrine\ORM\Query\Expr\Func
+    private function allVariantsRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): Func
     {
         $subquery = $queryBuilder->getEntityManager()->createQueryBuilder()
             ->select('cp.price')
@@ -84,43 +86,27 @@ final class PriceRule extends AbstractRule
             ->not($queryBuilder->expr()->exists($subquery->getDQL()));
     }
 
-    private function createFromFromOperator($price, QueryBuilder $queryBuilder, string $channelCodeParameter, string $priceParameter): \Doctrine\ORM\Query\Expr\Func
+    private function createFromFromOperator(string $operator, QueryBuilder $queryBuilder, string $channelCodeParameter, string $priceParameter): Func
     {
-        switch ($price) {
+        switch ($operator) {
             case PriceConfigurationType::OPERATOR_ALL_GT:
-                $rule = $this->allVariantRule($queryBuilder, $channelCodeParameter, '<=', $priceParameter);
-
-                break;
+                return $this->allVariantsRule($queryBuilder, $channelCodeParameter, '<=', $priceParameter);
             case PriceConfigurationType::OPERATOR_ALL_GTE:
-                $rule = $this->allVariantRule($queryBuilder, $channelCodeParameter, '<', $priceParameter);
-
-                break;
+                return $this->allVariantsRule($queryBuilder, $channelCodeParameter, '<', $priceParameter);
             case PriceConfigurationType::OPERATOR_ALL_LT:
-                $rule = $this->allVariantRule($queryBuilder, $channelCodeParameter, '>=', $priceParameter);
-
-                break;
+                return $this->allVariantsRule($queryBuilder, $channelCodeParameter, '>=', $priceParameter);
             case PriceConfigurationType::OPERATOR_ALL_LTE:
-                $rule = $this->allVariantRule($queryBuilder, $channelCodeParameter, '>', $priceParameter);
-
-                break;
+                return $this->allVariantsRule($queryBuilder, $channelCodeParameter, '>', $priceParameter);
             case PriceConfigurationType::OPERATOR_ANY_GT:
-                $rule = $this->anyVariantRule($queryBuilder, $channelCodeParameter, '>', $priceParameter);
-
-                break;
+                return $this->anyVariantRule($queryBuilder, $channelCodeParameter, '>', $priceParameter);
             case PriceConfigurationType::OPERATOR_ANY_GTE:
-                $rule = $this->anyVariantRule($queryBuilder, $channelCodeParameter, '>=', $priceParameter);
-
-                break;
+                return $this->anyVariantRule($queryBuilder, $channelCodeParameter, '>=', $priceParameter);
             case PriceConfigurationType::OPERATOR_ANY_LT:
-                $rule = $this->anyVariantRule($queryBuilder, $channelCodeParameter, '<', $priceParameter);
-
-                break;
+                return $this->anyVariantRule($queryBuilder, $channelCodeParameter, '<', $priceParameter);
             case PriceConfigurationType::OPERATOR_ANY_LTE:
-                $rule = $this->anyVariantRule($queryBuilder, $channelCodeParameter, '<=', $priceParameter);
-
-                break;
+                return $this->anyVariantRule($queryBuilder, $channelCodeParameter, '<=', $priceParameter);
         }
 
-        return $rule;
+        throw new InvalidArgumentException('Unkown operator');
     }
 }
