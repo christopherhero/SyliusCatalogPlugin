@@ -48,7 +48,6 @@ final class PriceRule extends AbstractRule
         $queryBuilder
             ->setParameter($priceParameter, $configuration['price'][$currentChannel]['amount'])
             ->setParameter($channelCodeParameter, $currentChannel)
-
         ;
     }
 

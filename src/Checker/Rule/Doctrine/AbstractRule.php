@@ -24,11 +24,11 @@ abstract class AbstractRule implements RuleInterface
     protected function addRule(string $connectingRules, QueryBuilder $queryBuilder, $rule): void
     {
         switch ($connectingRules) {
-            case RuleInterface:: AND:
+            case RuleInterface::AND:
                 $queryBuilder->andWhere($rule);
 
                 break;
-            case RuleInterface:: OR:
+            case RuleInterface::OR:
                 $queryBuilder->orWhere($rule);
 
                 break;

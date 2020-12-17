@@ -11,11 +11,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Twig\Extension;
 
-use BitBag\SyliusCatalogPlugin\Entity\Catalog;
+use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\CatalogResourceResolverInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductResolverInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 final class RenderCatalogExtension extends AbstractExtension
 {
@@ -39,13 +40,13 @@ final class RenderCatalogExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('bitbag_render_product_catalog', [$this, 'renderProductCatalog'], ['is_safe' => ['html']]),
+            new TwigFunction('bitbag_render_product_catalog', [$this, 'renderProductCatalog'], ['is_safe' => ['html']]),
         ];
     }
 
     public function renderProductCatalog(?string $code, ?string $template = null): string
     {
-        /** @var Catalog $catalog */
+        /** @var CatalogInterface $catalog */
         $catalog = $this->catalogResolver->findOrLog($code);
         $products = [];
 

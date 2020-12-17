@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch;
 
-use BitBag\SyliusCatalogPlugin\Entity\Catalog;
+use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\QueryBuilder\ProductQueryBuilderInterface;
 use BitBag\SyliusCatalogPlugin\Repository\CatalogRepositoryInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductCatalogResolverInterface;
@@ -19,20 +19,12 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductCatalogResolver implements ProductCatalogResolverInterface
 {
     /** @var RepositoryInterface */
     private $catalogRepository;
-
-    /** @var ServiceRegistry */
-    private $serviceRegistry;
-
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
 
     /** @var ProductQueryBuilderInterface */
     private $productQueryBuilder;
@@ -51,14 +43,14 @@ final class ProductCatalogResolver implements ProductCatalogResolverInterface
     }
 
     /**
-     * @return Catalog[]
+     * @return CatalogInterface[]
      */
     public function resolveProductCatalogs(ProductInterface $product, \DateTimeImmutable $on): array
     {
         $activeCatalogs = $this->catalogRepository->findActive($on);
         $result = [];
 
-        /** @var Catalog $activeCatalog */
+        /** @var CatalogInterface $activeCatalog */
         foreach ($activeCatalogs as $activeCatalog) {
             $boolQuery = new BoolQuery();
             if ($activeCatalog->getProductAssociationRules()->count()) {

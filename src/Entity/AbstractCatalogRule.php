@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Entity;
 
-abstract class AbstractCatalogRule implements CatalogRuleInterface
+abstract class AbstractCatalogRule
 {
     /** @var mixed */
     protected $id;

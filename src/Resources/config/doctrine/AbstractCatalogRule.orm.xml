@@ -15,11 +15,5 @@
 
     <field name="type" column="type" type="string" nullable="true" />
     <field name="configuration" column="configuration" type="array" />
-
-    <many-to-one field="catalog" target-entity="BitBag\SyliusCatalogPlugin\Entity\CatalogInterface" inversed-by="rules">
-        <join-column name="catalog_id" referenced-column-name="id" nullable="true" />
-    </many-to-one>
-
 </entity>
-
 </doctrine-mapping>

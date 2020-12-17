@@ -13,7 +13,7 @@ namespace BitBag\SyliusCatalogPlugin\Resolver;
 
 use BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine\RuleInterface;
 use BitBag\SyliusCatalogPlugin\Entity\AbstractCatalogRule;
-use BitBag\SyliusCatalogPlugin\Entity\Catalog;
+use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Repository\CatalogRepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -43,14 +43,14 @@ final class ProductCatalogResolver implements ProductCatalogResolverInterface
     }
 
     /**
-     * @return Catalog[]
+     * @return CatalogInterface[]
      */
     public function resolveProductCatalogs(ProductInterface $product, \DateTimeImmutable $on): array
     {
         $activeCatalogs = $this->catalogRepository->findActive($on);
         $result = [];
 
-        /** @var Catalog $activeCatalog */
+        /** @var CatalogInterface $activeCatalog */
         foreach ($activeCatalogs as $activeCatalog) {
             $connectingRules = $activeCatalog->getConnectingRules();
 

@@ -12,8 +12,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Fixture\Factory;
 
-use BitBag\SyliusCatalogPlugin\Entity\Catalog;
+use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogRule;
+use BitBag\SyliusCatalogPlugin\Entity\CatalogRuleInterface;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogTranslationInterface;
 use BitBag\SyliusCatalogPlugin\Repository\CatalogRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -53,7 +54,7 @@ final class CatalogFixtureFactory
 
     private function createCatalog(string $code, array $catalogData): void
     {
-        /** @var Catalog $catalog */
+        /** @var CatalogInterface $catalog */
         $catalog = $this->catalogFactory->createNew();
         $catalog->setCode($code);
 
@@ -87,9 +88,9 @@ final class CatalogFixtureFactory
         $this->catalogRepository->add($catalog);
     }
 
-    private function createRule($rule, string $ruleTarget, Catalog $catalog): void
+    private function createRule($rule, string $ruleTarget, CatalogInterface $catalog): void
     {
-        /** @var CatalogRule $catalogRule */
+        /** @var CatalogRuleInterface $catalogRule */
         $catalogRule = $this->catalogRuleFactory->createNew();
         $catalogRule->setConfiguration($rule['config']);
         $catalogRule->setType($rule['type']);
