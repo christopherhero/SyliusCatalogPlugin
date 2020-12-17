@@ -13,7 +13,7 @@ namespace BitBag\SyliusCatalogPlugin\Entity;
 
 abstract class AbstractCatalogRule
 {
-    /** @var mixed */
+    /** @var int|null */
     protected $id;
 
     /** @var string|null */
