@@ -18,9 +18,7 @@
     <a href="https://packagist.org/packages/bitbag/catalog-plugin" title="Total Downloads" target="_blank">
         <img src="https://poser.pugx.org/bitbag/catalog-plugin/downloads" />
     </a>
-    <p>
-        <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
-    </p>
+
 </h1>
 
 ## About us
