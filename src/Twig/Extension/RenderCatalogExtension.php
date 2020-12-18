@@ -30,7 +30,7 @@ final class RenderCatalogExtension extends AbstractExtension
     private $productResolver;
 
     public function __construct(
-        EngineInterface $engine, 
+        EngineInterface $engine,
         CatalogResourceResolverInterface $catalogResolver,
         ProductResolverInterface $productResolver
     ) {

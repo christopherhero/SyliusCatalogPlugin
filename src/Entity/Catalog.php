@@ -176,7 +176,7 @@ class Catalog implements CatalogInterface
     {
         if ($this->hasProductAssociationRule($rule)) {
             $rule->setCatalog(null);
-            $this->productAssociationRules-> removeElement($rule);
+            $this->productAssociationRules->removeElement($rule);
         }
     }
 
