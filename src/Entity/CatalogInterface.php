@@ -12,10 +12,11 @@ declare(strict_types=1);
 namespace BitBag\SyliusCatalogPlugin\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
-interface CatalogInterface extends ResourceInterface, TranslatableInterface
+interface CatalogInterface extends ResourceInterface, TranslatableInterface, CodeAwareInterface
 {
     public function getName(): ?string;
 
