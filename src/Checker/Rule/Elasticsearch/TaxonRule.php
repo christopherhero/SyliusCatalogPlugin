@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Rule\Elasticsearch;
 
-use App\Entity\Taxonomy\Taxon;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\Terms;
+use Sylius\Component\Core\Model\Taxon;
 
 final class TaxonRule implements RuleInterface
 {

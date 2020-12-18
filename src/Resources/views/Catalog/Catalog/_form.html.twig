@@ -24,7 +24,7 @@
                                 {{ form_widget(form.rules) }}
                         </div>
 
-                        <div class="column" id="rules">
+                        <div class="column" id="connecting_rules">
                                 <h5>{{ 'bitbag_sylius_catalog_plugin.ui.form.catalog.connecting_rules' | trans }}</h5>
                                 {{ form_widget(form.connectingRules) }}
                         </div>
@@ -33,11 +33,11 @@
         <div class="ui segment">
                 <h4 class="ui dividing header">{{ 'bitbag_sylius_catalog_plugin.ui.product_association_rules'|trans }}</h4>
                 <div class="ui two column stackable grid">
-                        <div class="column" id="rules">
+                        <div class="column" id="actions">
                                 {{ form_widget(form.productAssociationRules) }}
                         </div>
 
-                        <div class="column" id="rules">
+                        <div class="column" id="product_association_connecting_rules">
                                 <h5>{{ 'bitbag_sylius_catalog_plugin.ui.form.catalog.product_association_connecting_rules' | trans }}</h5>
                                 {{ form_widget(form.productAssociationConnectingRules) }}
                         </div>

@@ -13,6 +13,7 @@ namespace BitBag\SyliusCatalogPlugin\Form\Type;
 
 use BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine\RuleInterface;
 use BitBag\SyliusCatalogPlugin\Form\Type\Translation\CatalogTranslationType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,10 +25,12 @@ final class CatalogType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
         $builder
-            ->add('code', TextType::class, [
+            ->addEventSubscriber(new AddCodeFormSubscriber(TextType::class, [
                 'label' => 'bitbag_sylius_catalog_plugin.ui.code',
-            ])
+            ]))
             ->add('startDate', DateTimeType::class, [
                 'label' => 'bitbag_sylius_catalog_plugin.ui.start_date',
                 'date_widget' => 'single_text',
@@ -57,7 +60,7 @@ final class CatalogType extends AbstractResourceType
                 'label' => 'bitbag_sylius_catalog_plugin.ui.form.catalog.product_rules',
                 'button_add_label' => 'bitbag_sylius_catalog_plugin.ui.form.catalog.add_rule',
             ])
-            ->add('productAssociationConnectingRules', ChoiceType::class, [
+            ->add('productAssociationConnectingRules', ProductAssociationRuleChoiceType::class, [
                 'label' => 'bitbag_sylius_catalog_plugin.ui.form.catalog.rule_connecting_rules',
                 'choices' => [
                     'And' => 'And',
