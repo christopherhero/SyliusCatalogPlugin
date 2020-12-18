@@ -10,21 +10,41 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Rule\Elasticsearch;
 
-use BitBag\SyliusElasticsearchPlugin\QueryBuilder\ProductsByPartialNameQueryBuilder;
+use BitBag\SyliusElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolverInterface;
 use Elastica\Query\AbstractQuery;
+use Elastica\Query\Match;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class ProductNameRule implements RuleInterface
 {
-    /** @var ProductsByPartialNameQueryBuilder */
-    private $byPartialNameQueryBuilder;
+    /** @var LocaleContextInterface */
+    private $localeContext;
 
-    public function __construct(ProductsByPartialNameQueryBuilder $byPartialNameQueryBuilder)
-    {
-        $this->byPartialNameQueryBuilder = $byPartialNameQueryBuilder;
+    /** @var ConcatedNameResolverInterface */
+    private $productNameNameResolver;
+
+    /** @var string */
+    private $namePropertyPrefix;
+
+    public function __construct(
+        LocaleContextInterface $localeContext,
+        ConcatedNameResolverInterface $productNameNameResolver,
+        string $namePropertyPrefix
+    ) {
+        $this->localeContext = $localeContext;
+        $this->productNameNameResolver = $productNameNameResolver;
+        $this->namePropertyPrefix = $namePropertyPrefix;
     }
 
     public function createSubquery(array $configuration): AbstractQuery
     {
-        return $this->byPartialNameQueryBuilder->buildQuery(['name' => $configuration['catalogName']]);
+        $name = $configuration['catalogName'];
+        $localeCode = $this->localeContext->getLocaleCode();
+        $propertyName = $this->productNameNameResolver->resolvePropertyName($localeCode);
+
+        $nameQuery = new Match();
+        $nameQuery->setFieldQuery($propertyName, $name);
+
+        return $nameQuery;
     }
 }
