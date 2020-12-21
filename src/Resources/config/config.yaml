@@ -2,3 +2,4 @@ imports:
   - { resource: "@BitBagSyliusCatalogPlugin/Resources/config/resources.yaml" }
   - { resource: "@BitBagSyliusCatalogPlugin/Resources/config/grids.yaml" }
   - { resource: "@BitBagSyliusCatalogPlugin/Resources/config/_sylius.yaml" }
+  - { resource: "@BitBagSyliusCatalogPlugin/Resources/config/sylius_ui.yaml" }
