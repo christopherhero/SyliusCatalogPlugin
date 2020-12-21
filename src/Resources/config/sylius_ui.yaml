@@ -1,0 +1,5 @@
+sylius_ui:
+  events:
+    sylius.admin.layout.javascripts:
+      blocks:
+        rules_admin_js: '@BitBagSyliusCatalogPlugin/Admin/_javascripts.html.twig'
