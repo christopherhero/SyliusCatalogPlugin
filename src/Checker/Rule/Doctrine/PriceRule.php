@@ -16,6 +16,7 @@ use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class PriceRule extends AbstractRule
@@ -39,6 +40,7 @@ final class PriceRule extends AbstractRule
         /** @var string|null $currentChannel */
         $currentChannel = $this->channelContext->getChannel()->getCode();
 
+
         $this->addRule(
             $connectingRules,
             $queryBuilder,
@@ -58,16 +60,13 @@ final class PriceRule extends AbstractRule
 
     private function anyVariantRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): Func
     {
-        $productVariantAlias = sprintf('pv%d', $this->i++);
-        $channelPricingAlias = sprintf('cp%d', $this->i++);
-
         $subquery = $queryBuilder->getEntityManager()->createQueryBuilder()
-            ->select(sprintf('%s.price', $channelPricingAlias))
-            ->from(ProductVariantInterface::class, $productVariantAlias)
-            ->join(sprintf('%s.channelPricings', $productVariantAlias), $channelPricingAlias)
-            ->where(sprintf('%s.product = p', $productVariantAlias))
-            ->andWhere(sprintf('%s.channelCode = :%s', $channelPricingAlias, $channelCodeParameter))
-            ->andWhere(sprintf('%s.price %s :%s', $channelPricingAlias, $subqueryOperator, $priceParameter))
+            ->select('cp.price')
+            ->from(ProductVariant::class, 'pv')
+            ->join('pv.channelPricings', 'cp')
+            ->where('pv.product = p')
+            ->andWhere('cp.channelCode = :' . $channelCodeParameter)
+            ->andWhere("cp.price {$subqueryOperator} :" . $priceParameter)
             ->getQuery();
 
         return $queryBuilder->expr()->exists($subquery->getDQL());
@@ -75,15 +74,13 @@ final class PriceRule extends AbstractRule
 
     private function allVariantsRule(QueryBuilder $queryBuilder, string $channelCodeParameter, string $subqueryOperator, string $priceParameter): Func
     {
-        $productVariantAlias = sprintf('pv%d', $this->i++);
-        $channelPricingAlias = sprintf('cp%d', $this->i++);
         $subquery = $queryBuilder->getEntityManager()->createQueryBuilder()
-            ->select(sprintf('%s.price', $channelPricingAlias))
-            ->from(ProductVariantInterface::class, $productVariantAlias)
-            ->join(sprintf('%s.channelPricings', $productVariantAlias), $channelPricingAlias)
-            ->where(sprintf('%s.product = p', $productVariantAlias))
-            ->andWhere(sprintf('%s.channelCode = :%s', $channelPricingAlias, $channelCodeParameter))
-            ->andWhere(sprintf('%s.price %s :%s', $channelPricingAlias, $subqueryOperator, $priceParameter))
+            ->select('cp.price')
+            ->from(ProductVariantInterface::class, 'pv')
+            ->join('pv.channelPricings', 'cp')
+            ->where('pv.product = p')
+            ->andWhere(sprintf('cp.channelCode = :%s',$channelCodeParameter))
+            ->andWhere(sprintf("cp.price %s :%s",$subqueryOperator, $priceParameter))
             ->getQuery();
 
         return $queryBuilder->expr()

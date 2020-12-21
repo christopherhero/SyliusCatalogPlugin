@@ -20,7 +20,7 @@ final class ProductAssociationRuleType extends AbstractConfigurableCatalogElemen
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('type', ProductAssociationRuleChoiceType::class, [
+            ->add('type', CatalogRuleChoiceType::class, [
                 'label' => 'bitbag_sylius_catalog_plugin.ui.form.catalog.rule_type',
                 'attr' => [
                     'data-form-collection' => 'update',

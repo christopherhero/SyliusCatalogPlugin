@@ -37,8 +37,8 @@ class ProductResolver implements ProductResolverInterface
         if ($catalog->getRules()->count()) {
             $query = $this->productQueryBuilder->findMatchingProductsQuery($catalog->getConnectingRules(), $catalog->getRules());
         }
-        $products = $this->productFinder->find($query, 1000);
+        $products = $this->productFinder->findPaginated($query);
 
-        return $products;
+        return $products->getCurrentPageResults();
     }
 }

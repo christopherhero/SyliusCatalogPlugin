@@ -6,7 +6,7 @@ namespace BitBag\SyliusCatalogPlugin\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductAssociationRuleInterface extends ResourceInterface, ConfigurableCatalogElementInterface
+interface ProductAssociationRuleInterface extends ResourceInterface
 {
     public function getType(): ?string;
 
