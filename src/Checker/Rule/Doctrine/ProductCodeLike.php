@@ -12,7 +12,7 @@ namespace BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine;
 
 use Doctrine\ORM\QueryBuilder;
 
-final class ProductCodeLike extends AbstractRule
+final class ProductCodeLike extends AbstractRule implements RuleInterface
 {
     public const PRODUCT_ALIAS = 'p';
 
