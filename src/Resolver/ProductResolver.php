@@ -47,7 +47,7 @@ class ProductResolver implements ProductResolverInterface
             ->leftJoin('p.productTaxons', 'productTaxon')
             ->leftJoin('productTaxon.taxon', 'taxon')
             ->leftJoin('variant.channelPricings', 'price');
-        ;
+
         foreach ($rules as $rule) {
             $type = $rule->getType();
 
