@@ -51,6 +51,7 @@ final class ProductQueryBuilder implements ProductQueryBuilderInterface
             case RuleInterface::OR:
                 foreach ($subQueries as $subQuery) {
                     $query->addShould($subQuery);
+                    $query->setMinimumShouldMatch(1);   
                 }
 
                 break;
