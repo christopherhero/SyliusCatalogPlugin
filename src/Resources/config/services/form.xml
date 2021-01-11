@@ -49,6 +49,9 @@
             <argument>%bitbag_sylius_catalog_plugin.catalog_rules%</argument>
             <tag name="form.type" />
         </service>
+        <service id="bitbag_sylius_catalog_plugin.form.type.channel_price" class="BitBag\SyliusCatalogPlugin\Form\Type\ChannelPriceType">
+            <tag name="form.type" />
+        </service>
         <service id="bitbag_sylius_catalog_plugin.form.type.product_association_rule" class="BitBag\SyliusCatalogPlugin\Form\Type\ProductAssociationRuleType">
             <argument>%bitbag_sylius_catalog_plugin.model.product_association_rule.class%</argument>
             <argument type="collection"></argument>

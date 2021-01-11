@@ -12,17 +12,21 @@ declare(strict_types=1);
 namespace BitBag\SyliusCatalogPlugin\Form\Type;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\Type;
 
 class ChannelBasedRulePricing extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entry_type' => ItemTotalConfigurationType::class,
+            'entry_type' => ChannelPriceType::class,
             'entry_options' => function (ChannelInterface $channel) {
                 return [
                     'label' => $channel->getCode(),
