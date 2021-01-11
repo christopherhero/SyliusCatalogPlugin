@@ -1,3 +1,4 @@
+{% if catalogs %}
 <h4 class="ui horizontal section divider header">{{ 'bitbag_sylius_catalog_plugin.ui.catalogs'|trans }}</h4>
 
 {% for catalogData in catalogs %}
@@ -5,3 +6,4 @@
     {% set products = catalogData.products %}
     {% include '@BitBagSyliusCatalogPlugin/Catalog/showProducts.html.twig' %}
 {% endfor %}
+{% endif %}

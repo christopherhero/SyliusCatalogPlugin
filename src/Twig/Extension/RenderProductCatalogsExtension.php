@@ -53,15 +53,22 @@ final class RenderProductCatalogsExtension extends AbstractExtension
 
         $template = $template ?? '@BitBagSyliusCatalogPlugin/Product/showCatalogs.html.twig';
 
-        $catalogs = array_map(
-            function (CatalogInterface $catalog) {
-                return [
-                    'catalog' => $catalog,
-                    'products' => $this->productResolver->findMatchingProducts($catalog),
-                ];
-            },
-            $catalogs
-        );
+        $catalogs =
+            array_filter(
+                array_map(
+                    function (CatalogInterface $catalog) {
+                        return [
+                            'catalog' => $catalog,
+                            'products' => $this->productResolver->findMatchingProducts($catalog),
+                        ];
+                    },
+                    $catalogs
+                ),
+                function (array $catalogData) {
+                    return 0 < count($catalogData['products']);
+                }
+            )
+         ;
 
         return $this->engine->render($template, ['catalogs' => $catalogs]);
     }
