@@ -14,7 +14,7 @@ class CompleteCatalogsForProductResolverSpec extends ObjectBehavior
     function let(
         CatalogsForProductResolverInterface $catalogsForProductResolver,
         ProductsInsideCatalogResolverInterface $catalogResolver
-    ) {
+    ): void {
         $this->beConstructedWith($catalogsForProductResolver, $catalogResolver);
     }
 
@@ -26,8 +26,7 @@ class CompleteCatalogsForProductResolverSpec extends ObjectBehavior
         ProductInterface $productInsideCatalog2,
         CatalogsForProductResolverInterface $catalogsForProductResolver,
         ProductsInsideCatalogResolverInterface $catalogResolver
-    ): void
-    {
+    ): void {
         $date = new \DateTimeImmutable();
         $catalogsForProductResolver->resolveProductCatalogs($product, $date)->willReturn([$catalog1, $catalog2]);
         $catalogResolver->findMatchingProducts($catalog1)->willReturn([$productInsideCatalog1]);
@@ -54,8 +53,7 @@ class CompleteCatalogsForProductResolverSpec extends ObjectBehavior
         ProductInterface $productInsideCatalog,
         CatalogsForProductResolverInterface $catalogsForProductResolver,
         ProductsInsideCatalogResolverInterface $catalogResolver
-    ): void
-    {
+    ): void {
         $date = new \DateTimeImmutable();
         $catalogsForProductResolver->resolveProductCatalogs($product, $date)->willReturn([$catalogEmpty, $catalogNotEmpty]);
         $catalogResolver->findMatchingProducts($catalogEmpty)->willReturn([]);
