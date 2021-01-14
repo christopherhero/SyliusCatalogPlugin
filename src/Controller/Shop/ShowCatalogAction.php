@@ -11,8 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Controller\Shop;
 
-use BitBag\SyliusCatalogPlugin\Resolver\ProductResolverInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +30,7 @@ final class ShowCatalogAction
 
     public function __construct(
         RepositoryInterface $catalogRepository,
-        ProductResolverInterface $productResolver,
+        ProductsInsideCatalogResolverInterface $productResolver,
         EngineInterface $templatingEngine
     ) {
         $this->templatingEngine = $templatingEngine;
@@ -48,7 +47,7 @@ final class ShowCatalogAction
 
         return $this->templatingEngine->renderResponse($template, [
             'catalog' => $catalog,
-            'products' => new Paginator(),
+            'products' => $products,
         ]);
     }
 }

@@ -21,7 +21,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class ProductCatalogResolver implements ProductCatalogResolverInterface
+final class CatalogsForProductResolver implements CatalogsForProductResolverInterface
 {
     /** @var RepositoryInterface */
     private $catalogRepository;

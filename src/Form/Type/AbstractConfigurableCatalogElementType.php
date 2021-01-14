@@ -35,7 +35,6 @@ abstract class AbstractConfigurableCatalogElementType extends AbstractResourceTy
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
-
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $type = $this->getRegistryIdentifier($event->getForm(), $event->getData());
@@ -55,7 +54,6 @@ abstract class AbstractConfigurableCatalogElementType extends AbstractResourceTy
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $data = $event->getData();
-
                 if (!isset($data['type'])) {
                     return;
                 }

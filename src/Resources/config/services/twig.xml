@@ -12,8 +12,7 @@
         <service id="bitbag_sylius_catalog_plugin.twig.extension.product_catalogs" class="BitBag\SyliusCatalogPlugin\Twig\Extension\RenderProductCatalogsExtension" public="false">
             <tag name="twig.extension" />
             <argument type="service" id="templating" />
-            <argument type="service" id="bitbag.resolver.catalog.product_catalog_resolver" />
-            <argument type="service" id="bitbag.resolver.catalog.product_resource" />
+            <argument type="service" id="bitbag.resolver.catalog.complete_catalogs_for_product_resolver" />
         </service>
     </services>
 </container>
