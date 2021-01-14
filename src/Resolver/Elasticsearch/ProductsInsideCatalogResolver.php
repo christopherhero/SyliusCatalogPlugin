@@ -14,10 +14,11 @@ namespace BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\QueryBuilder\ProductQueryBuilderInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductResolverInterface;
+use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Elastica\Query\BoolQuery;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
 
-class ProductResolver implements ProductResolverInterface
+class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInterface
 {
     /** @var ProductQueryBuilderInterface */
     private $productQueryBuilder;
@@ -31,7 +32,7 @@ class ProductResolver implements ProductResolverInterface
         $this->productFinder = $paginatedFinder;
     }
 
-    public function findMatchingProducts(CatalogInterface $catalog)
+    public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $query = new BoolQuery();
         if ($catalog->getRules()->count()) {

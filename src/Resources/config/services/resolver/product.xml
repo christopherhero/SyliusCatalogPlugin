@@ -6,15 +6,20 @@
         xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true" />
-        <service id="bitbag.resolver.catalog.product_resource" class="BitBag\SyliusCatalogPlugin\Resolver\ProductResolver">
+        <service id="bitbag.resolver.catalog.product_resource" class="BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolver">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_rule_checker.doctrine" />
         </service>
 
-        <service id="bitbag.resolver.catalog.product_catalog_resolver" class="BitBag\SyliusCatalogPlugin\Resolver\ProductCatalogResolver">
+        <service id="bitbag.resolver.catalog.product_catalog_resolver" class="BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolver">
             <argument type="service" id="bitbag_sylius_catalog_plugin.repository.catalog" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_rule_checker.doctrine" />
+        </service>
+
+        <service id="bitbag.resolver.catalog.complete_catalogs_for_product_resolver" class="BitBag\SyliusCatalogPlugin\Resolver\CompleteCatalogsForProductResolver">
+            <argument type="service" id="bitbag.resolver.catalog.product_catalog_resolver" />
+            <argument type="service" id="bitbag.resolver.catalog.product_resource" />
         </service>
     </services>
 </container>

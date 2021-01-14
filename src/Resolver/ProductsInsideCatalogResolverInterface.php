@@ -13,7 +13,7 @@ namespace BitBag\SyliusCatalogPlugin\Resolver;
 
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 
-interface ProductResolverInterface
+interface ProductsInsideCatalogResolverInterface
 {
-    public function findMatchingProducts(CatalogInterface $catalog);
+    public function findMatchingProducts(CatalogInterface $catalog): array;
 }

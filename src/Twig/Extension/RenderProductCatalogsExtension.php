@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace BitBag\SyliusCatalogPlugin\Twig\Extension;
 
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
-use BitBag\SyliusCatalogPlugin\Resolver\ProductCatalogResolverInterface;
-use BitBag\SyliusCatalogPlugin\Resolver\ProductResolverInterface;
+use BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolverInterface;
+use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Twig\Extension\AbstractExtension;
@@ -24,20 +24,15 @@ final class RenderProductCatalogsExtension extends AbstractExtension
     /** @var EngineInterface */
     private $engine;
 
-    /** @var ProductCatalogResolverInterface */
+    /** @var CatalogsForProductResolverInterface */
     private $productCatalogResolver;
-
-    /** @var ProductResolverInterface */
-    private $productResolver;
 
     public function __construct(
         EngineInterface $engine,
-        ProductCatalogResolverInterface $productCatalogResolver,
-        ProductResolverInterface $productResolver
+        CatalogsForProductResolverInterface $productCatalogResolver
         ) {
         $this->engine = $engine;
         $this->productCatalogResolver = $productCatalogResolver;
-        $this->productResolver = $productResolver;
     }
 
     public function getFunctions(): array
@@ -49,20 +44,14 @@ final class RenderProductCatalogsExtension extends AbstractExtension
 
     public function renderProductCatalogs(ProductInterface $product, ?string $date = null, ?string $template = null): string
     {
-        $catalogs = $this->productCatalogResolver->resolveProductCatalogs($product, new \DateTimeImmutable($date ?? 'now'));
-
-        $template = $template ?? '@BitBagSyliusCatalogPlugin/Product/showCatalogs.html.twig';
-
-        $catalogs = array_map(
-            function (CatalogInterface $catalog) {
-                return [
-                    'catalog' => $catalog,
-                    'products' => $this->productResolver->findMatchingProducts($catalog),
-                ];
-            },
-            $catalogs
+        return $this->engine->render(
+            $template ?? '@BitBagSyliusCatalogPlugin/Product/showCatalogs.html.twig',
+            [
+                'catalogs' => $this->productCatalogResolver->resolveProductCatalogs(
+                    $product,
+                    new \DateTimeImmutable($date ?? 'now')
+                )
+            ]
         );
-
-        return $this->engine->render($template, ['catalogs' => $catalogs]);
     }
 }

@@ -17,7 +17,7 @@ use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Component\Registry\ServiceRegistry;
 
-class ProductResolver implements ProductResolverInterface
+class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInterface
 {
     /** @var ProductRepository */
     private $productRepository;
@@ -31,7 +31,7 @@ class ProductResolver implements ProductResolverInterface
         $this->productRepository = $productRepository;
     }
 
-    public function findMatchingProducts(CatalogInterface $catalog)
+    public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $connectingRules = $catalog->getConnectingRules();
 

@@ -39,6 +39,6 @@ final class ProductAssociationRuleChoiceType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'bitbag_sylius_catalog_plugin_product_association_rule_choice';
+        return 'bitbag_sylius_catalog_plugin_catalog_product_rule_choice';
     }
 }

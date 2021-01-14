@@ -14,14 +14,14 @@ namespace BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\QueryBuilder\ProductQueryBuilderInterface;
 use BitBag\SyliusCatalogPlugin\Repository\CatalogRepositoryInterface;
-use BitBag\SyliusCatalogPlugin\Resolver\ProductCatalogResolverInterface;
+use BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolverInterface;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class ProductCatalogResolver implements ProductCatalogResolverInterface
+final class CatalogsForProductResolver implements CatalogsForProductResolverInterface
 {
     /** @var RepositoryInterface */
     private $catalogRepository;

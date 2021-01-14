@@ -7,7 +7,7 @@ namespace BitBag\SyliusCatalogPlugin\Resolver;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-interface ProductCatalogResolverInterface
+interface CatalogsForProductResolverInterface
 {
     /**
      * @return CatalogInterface[]

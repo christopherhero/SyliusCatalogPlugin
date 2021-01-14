@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\Valid;
 
 final class PriceConfigurationType extends AbstractType
@@ -54,6 +55,7 @@ final class PriceConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_catalog_plugin.ui.form.catalog.add_catalog_configuration',
                 'constraints' => [
                     new Valid(['groups' => ['sylius']]),
+                    new Positive(['groups' => ['sylius']]),
                 ],
             ]);
     }
