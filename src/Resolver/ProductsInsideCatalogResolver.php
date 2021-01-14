@@ -31,7 +31,7 @@ class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInte
         $this->productRepository = $productRepository;
     }
 
-    public function findMatchingProducts(CatalogInterface $catalog)
+    public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $connectingRules = $catalog->getConnectingRules();
 

@@ -15,5 +15,5 @@ use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 
 interface ProductsInsideCatalogResolverInterface
 {
-    public function findMatchingProducts(CatalogInterface $catalog);
+    public function findMatchingProducts(CatalogInterface $catalog): array;
 }

@@ -27,9 +27,6 @@ final class RenderProductCatalogsExtension extends AbstractExtension
     /** @var CatalogsForProductResolverInterface */
     private $productCatalogResolver;
 
-    /** @var ProductsInsideCatalogResolverInterface */
-    private $productResolver;
-
     public function __construct(
         EngineInterface $engine,
         CatalogsForProductResolverInterface $productCatalogResolver
@@ -47,30 +44,6 @@ final class RenderProductCatalogsExtension extends AbstractExtension
 
     public function renderProductCatalogs(ProductInterface $product, ?string $date = null, ?string $template = null): string
     {
-<<<<<<< Updated upstream
-        $catalogs = $this->productCatalogResolver->resolveProductCatalogs($product, new \DateTimeImmutable($date ?? 'now'));
-
-        $template = $template ?? '@BitBagSyliusCatalogPlugin/Product/showCatalogs.html.twig';
-
-        $catalogs =
-            array_filter(
-                array_map(
-                    function (CatalogInterface $catalog) {
-                        return [
-                            'catalog' => $catalog,
-                            'products' => $this->productResolver->findMatchingProducts($catalog),
-                        ];
-                    },
-                    $catalogs
-                ),
-                function (array $catalogData) {
-                    return 0 < count($catalogData['products']);
-                }
-            )
-         ;
-
-        return $this->engine->render($template, ['catalogs' => $catalogs]);
-=======
         return $this->engine->render(
             $template ?? '@BitBagSyliusCatalogPlugin/Product/showCatalogs.html.twig',
             [
@@ -80,6 +53,5 @@ final class RenderProductCatalogsExtension extends AbstractExtension
                 )
             ]
         );
->>>>>>> Stashed changes
     }
 }

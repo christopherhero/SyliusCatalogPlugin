@@ -32,7 +32,7 @@ class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInte
         $this->productFinder = $paginatedFinder;
     }
 
-    public function findMatchingProducts(CatalogInterface $catalog)
+    public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $query = new BoolQuery();
         if ($catalog->getRules()->count()) {
