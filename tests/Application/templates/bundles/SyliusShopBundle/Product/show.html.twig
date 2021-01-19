@@ -1,5 +1,10 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'bundles/bitbagsyliuscatalogplugin/css/bitbag-catalog.css'} %}
+{% endblock %}
+
 {% block content %}
     {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
     <div class="ui hidden divider"></div>
