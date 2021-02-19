@@ -38,6 +38,7 @@ class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInte
         if ($catalog->getRules()->count()) {
             $query = $this->productQueryBuilder->findMatchingProductsQuery($catalog->getConnectingRules(), $catalog->getRules());
         }
+
         $products = $this->productFinder->find($query, 1000);
 
         return $products;

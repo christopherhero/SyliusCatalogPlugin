@@ -66,7 +66,15 @@
             <argument>%bitbag_sylius_catalog_plugin.product_association_rules%</argument>
             <tag name="form.type" />
         </service>
-
-
+<!--        <service id="bitbag_sylius_catalog_plugin.form.type.catalog_sort_choice_type" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogSortChoiceType">-->
+<!--            <argument>%bitbag_sylius_catalog_plugin.catalog_sorts%</argument>-->
+<!--            <tag name="form.type" />-->
+<!--        </service>-->
+<!--        <service id="bitbag_sylius_catalog_plugin.form.type.catalog_sort_type" class="BitBag\SyliusCatalogPlugin\Form\Type\CatalogSortType">-->
+<!--            <argument>%bitbag_sylius_catalog_plugin.model.catalog_rule.class%</argument>-->
+<!--            <argument>%bitbag_sylius_catalog_plugin.form.type.catalog.validation_groups%</argument>-->
+<!--            <argument>%bitbag_sylius_catalog_plugin.catalog_sorts.doctrine%</argument>-->
+<!--            <tag name="form.type" />-->
+<!--        </service>-->
     </services>
 </container>

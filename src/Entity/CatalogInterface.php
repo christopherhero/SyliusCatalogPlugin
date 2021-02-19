@@ -51,4 +51,16 @@ interface CatalogInterface extends ResourceInterface, TranslatableInterface, Cod
     public function getProductAssociationRules(): Collection;
 
     public function getProductAssociationConnectingRules(): ?string;
+
+    public function getTemplate(): ?string;
+
+    public function setTemplate(?string $template): void;
+
+    public function getDisplayProducts(): ?int;
+
+    public function setDisplayProducts(?int $displayProducts): void;
+
+    public function getSortingType(): ?string;
+
+    public function setSortingType(?string $sortingType): void;
 }

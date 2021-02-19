@@ -4,6 +4,10 @@
 {% for catalogData in catalogs %}
     {% set catalog = catalogData.catalog %}
     {% set products = catalogData.products %}
-    {% include '@BitBagSyliusCatalogPlugin/Catalog/showProducts.html.twig' %}
+    {% if catalog.template is empty %}
+        {% include '@BitBagSyliusCatalogPlugin/Catalog/Templates/showProductsCart.html.twig' %}
+    {% else %}
+        {% include catalog.template %}
+    {% endif %}
 {% endfor %}
 {% endif %}

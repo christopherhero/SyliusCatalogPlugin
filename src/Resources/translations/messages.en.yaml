@@ -11,6 +11,11 @@ bitbag_sylius_catalog_plugin:
         configuration: Rules - which products should be included inside catalog
         catalog_rule.channel: Channel
         product_association_rules: Rules - in which products catalog should be shown
+        template: Template
+        number_of_products: Number of products
+        configuration_view: Configuration view
+        sorting_type: Sorting by
+        desc_asc: Desc/Asc
         form:
             catalog_rule:
                 sort_by_code: By product code
@@ -43,4 +48,11 @@ bitbag_sylius_catalog_plugin:
                 product_price_less: first variant price smaller
                 product_price_less_equal: first variant price smaller or equal
                 taxons: Taxons
+                default_template: Default template
+                most_wishlisted: Most wishlisted
+                bestsellers: Bestsellers
+                newest: Newest
+                oldest: Oldest
+                most_expensive: Most expensive
+                cheapest: Cheapest
 

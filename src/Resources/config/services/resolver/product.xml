@@ -9,6 +9,7 @@
         <service id="bitbag.resolver.catalog.product_resource" class="BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolver">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_rule_checker.doctrine" />
+            <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_sort_checker.doctrine" />
         </service>
 
         <service id="bitbag.resolver.catalog.product_catalog_resolver" class="BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolver">

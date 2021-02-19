@@ -1,0 +1,27 @@
+{% if products %}
+<div class="bitbag-block catalog-block">
+    <h3>{{ catalog.name }}</h3>
+    {% for product in products %}
+    {% if product.imagesByType('thumbnail') is not empty %}
+        {% set path = product.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+    {% elseif product.images.first %}
+        {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+    {% else %}
+        {% set path = '//placehold.it/200x200' %}
+    {% endif %}
+
+        <div class="ui card">
+            <div class="content">
+                <img class="ui avatar image" src="{{ path }}">
+            </div>
+            <div class="image">
+                <img>
+            </div>
+            <div class="content">
+                <i class="comment icon"></i>
+                {{ product.name }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

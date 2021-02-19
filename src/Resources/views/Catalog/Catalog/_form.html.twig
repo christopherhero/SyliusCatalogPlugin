@@ -10,12 +10,21 @@
                 <div class="column stackable grid">
                         {{ form_row(form.code) }}
                 </div>
-        <h4 class="ui dividing header">{{ 'sylius.ui.start_date'|trans }} &amp; {{ 'sylius.ui.end_date'|trans }}</h4>
-
+                <h4 class="ui dividing header">{{ 'sylius.ui.start_date'|trans }} &amp; {{ 'sylius.ui.end_date'|trans }}</h4>
                 <div class="two fields">
                         {{ form_row(form.startDate) }}
                         {{ form_row(form.endDate) }}
                 </div>
+                <h4 class="ui dividing header">{{ 'bitbag_sylius_catalog_plugin.ui.configuration_view'|trans }}</h4>
+                <div class="two fields">
+                        {{ form_row(form.template) }}
+                        {{ form_row(form.displayProducts) }}
+                </div>
+                <div class="two fields">
+                        {{ form_row(form.template) }}
+                        {{ form_row(form.displayProducts) }}
+                </div>
+                {{ form_row(form.sortingType) }}
         </div>
         <div class="ui segment">
                 <h4 class="ui dividing header">{{ 'bitbag_sylius_catalog_plugin.ui.configuration'|trans }}</h4>

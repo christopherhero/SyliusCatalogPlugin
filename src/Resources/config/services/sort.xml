@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="bitbag_sylius_catalog_plugin.catalog_sort_checker.newest_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\NewestSort">
+            <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="newest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.newest" />
+        </service>
+
+        <service id="bitbag_sylius_catalog_plugin.catalog_sort_checker.oldest_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\OldestSort">
+            <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="oldest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.oldest" />
+        </service>
+
+        <service id="bitbag_sylius_catalog_plugin.catalog_sort_checker.most_expensive_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\MostExpensiveSort">
+            <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="most_expensive" label="bitbag_sylius_catalog_plugin.ui.form.catalog.most_expensive" />
+        </service>
+
+        <service id="bitbag_sylius_catalog_plugin.catalog_sort_checker.cheapest_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\CheapestSort">
+            <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="cheapest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.cheapest" />
+        </service>
+    </services>
+</container>
