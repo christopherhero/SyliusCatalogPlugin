@@ -9,6 +9,7 @@
         <import resource="services/controller/shop.xml" />
         <import resource="services/resolver/catalog.xml" />
         <import resource="services/resolver/product.xml" />
+        <import resource="services/sort.xml" />
     </imports>
     <services>
         <service id="bitbag_sylius_catalog_plugin.listener.admin.menu_builder" class="BitBag\SyliusCatalogPlugin\Menu\AdminMenuListener">
@@ -19,5 +20,10 @@
             <argument>rule checker</argument>
         </service>
         <service id="bitbag_sylius_catalog_plugin.form_registry.catalog_rule_checker.doctrine" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
+
+        <service id="bitbag_sylius_catalog_plugin.registry_catalog_sort_checker.doctrine" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\SortInterface</argument>
+            <argument>sort checker</argument>
+        </service>
     </services>
 </container>

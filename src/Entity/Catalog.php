@@ -52,7 +52,20 @@ class Catalog implements CatalogInterface
     /** @var CatalogRuleInterface[]|Collection */
     protected $productAssociationRules;
 
+    /** @var string */
     protected $productAssociationConnectingRules;
+
+    /** @var string|null */
+    protected $template;
+
+    /** @var int|null */
+    protected $displayProducts;
+
+    /** @var string|null */
+    protected $sortBy;
+
+    /** @var string|null */
+    protected $sortingType;
 
     public function getConnectingRules(): ?string
     {
@@ -188,5 +201,35 @@ class Catalog implements CatalogInterface
     public function setProductAssociationConnectingRules($productAssociationConnectingRules): void
     {
         $this->productAssociationConnectingRules = $productAssociationConnectingRules;
+    }
+
+    public function getTemplate(): ?string
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(?string $template): void
+    {
+        $this->template = $template;
+    }
+
+    public function getDisplayProducts(): ?int
+    {
+        return $this->displayProducts;
+    }
+
+    public function setDisplayProducts(?int $displayProducts): void
+    {
+        $this->displayProducts = $displayProducts;
+    }
+
+    public function getSortingType(): ?string
+    {
+        return $this->sortingType;
+    }
+
+    public function setSortingType(?string $sortingType): void
+    {
+        $this->sortingType = $sortingType;
     }
 }

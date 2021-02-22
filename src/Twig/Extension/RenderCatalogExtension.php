@@ -46,7 +46,7 @@ final class RenderCatalogExtension extends AbstractExtension
         ];
     }
 
-    public function renderProductCatalog(?string $code, ?string $template = null): string
+    public function renderProductCatalog(?string $code): string
     {
         /** @var CatalogInterface $catalog */
         $catalog = $this->catalogResolver->findOrLog($code);
@@ -57,7 +57,7 @@ final class RenderCatalogExtension extends AbstractExtension
         }
 
         if (empty($products) !== null && $catalog !== null) {
-            $template = $template ?? '@BitBagSyliusCatalogPlugin/Catalog/showProducts.html.twig';
+            $template = $catalog->getTemplate() ?? '@BitBagSyliusCatalogPlugin/Catalog/Templates/showProducts.html.twig';
 
             return $this->engine->render($template, ['products' => $products, 'catalog' => $catalog]);
         }

@@ -12,16 +12,28 @@ declare(strict_types=1);
 namespace BitBag\SyliusCatalogPlugin\Form\Type;
 
 use BitBag\SyliusCatalogPlugin\Checker\Rule\Doctrine\RuleInterface;
+use BitBag\SyliusCatalogPlugin\Choices\Catalog;
 use BitBag\SyliusCatalogPlugin\Form\Type\Translation\CatalogTranslationType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class CatalogType extends AbstractResourceType
 {
+    /** @var array */
+    private $attributeChoices;
+
+    public function __construct(string $dataClass, array $attributeChoices, array $validationGroups = [])
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->attributeChoices = $attributeChoices;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -37,6 +49,21 @@ final class CatalogType extends AbstractResourceType
                 'label' => 'bitbag_sylius_catalog_plugin.ui.end_date',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+            ])
+            ->add('template', ChoiceType::class, [
+                'label' => 'bitbag_sylius_catalog_plugin.ui.template',
+                'choices' => Catalog::getTemplates(),
+            ])
+            ->add('sortingType', ChoiceType::class, [
+                'label' => 'bitbag_sylius_catalog_plugin.ui.sorting_type',
+                'choices' => array_flip($this->attributeChoices),
+            ])
+            ->add('displayProducts', ChoiceType::class, [
+                'label' => 'bitbag_sylius_catalog_plugin.ui.number_of_products',
+                'choices' => array_combine(
+                    range(1, 12, 1),
+                    range(1, 12, 1)
+                ),
             ])
             ->add('translations', ResourceTranslationsType::class, [
                 'label' => 'bitbag_sylius_catalog_plugin.ui.catalog',

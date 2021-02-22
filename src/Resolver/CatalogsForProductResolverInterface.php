@@ -9,8 +9,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface CatalogsForProductResolverInterface
 {
-    /**
-     * @return CatalogInterface[]
-     */
+    /** @return CatalogInterface[] */
     public function resolveProductCatalogs(ProductInterface $product, \DateTimeImmutable $dataTime): array;
 }

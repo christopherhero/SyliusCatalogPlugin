@@ -35,6 +35,8 @@ final class BitBagSyliusCatalogExtension extends Extension
         $container->setAlias('bitbag_sylius_catalog_plugin.registry_catalog_rule_checker', sprintf('bitbag_sylius_catalog_plugin.registry_catalog_rule_checker.%s', $config['driver']));
         $container->setAlias('bitbag_sylius_catalog_plugin.form_registry.catalog_rule_checker', sprintf('bitbag_sylius_catalog_plugin.form_registry.catalog_rule_checker.%s', $config['driver']));
 
+        $container->setAlias('bitbag_sylius_catalog_plugin.registry_catalog_sort_checker', sprintf('bitbag_sylius_catalog_plugin.registry_catalog_sort_checker.%s', $config['driver']));
+
         $container->setDefinition(
             'bitbag_sylius_catalog_plugin.form.type.catalog_rule.choice',
             $container->getDefinition('bitbag_sylius_catalog_plugin.form.type.catalog_rule.choice')
@@ -51,6 +53,12 @@ final class BitBagSyliusCatalogExtension extends Extension
             'bitbag_sylius_catalog_plugin.form.type.product_association_rule.choice',
             $container->getDefinition('bitbag_sylius_catalog_plugin.form.type.product_association_rule.choice')
                 ->setArgument(0, sprintf('%%bitbag_sylius_catalog_plugin.product_association_rules.%s%%', $config['driver']))
+        );
+
+        $container->setDefinition(
+            'bitbag_sylius_catalog_plugin.form.type.catalog',
+            $container->getDefinition('bitbag_sylius_catalog_plugin.form.type.catalog')
+                ->setArgument(1, sprintf('%%bitbag_sylius_catalog_plugin.catalog_sorts.%s%%', $config['driver']))
         );
     }
 
