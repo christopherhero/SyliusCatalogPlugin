@@ -22,8 +22,10 @@ final class CompleteCatalogsForProductResolver implements CatalogsForProductReso
     /** @var ProductsInsideCatalogResolverInterface */
     private $catalogResolver;
 
-    public function __construct(CatalogsForProductResolverInterface $wrappedResolver, ProductsInsideCatalogResolverInterface $catalogResolver)
-    {
+    public function __construct(
+        CatalogsForProductResolverInterface $wrappedResolver,
+        ProductsInsideCatalogResolverInterface $catalogResolver
+    ) {
         $this->wrappedResolver = $wrappedResolver;
         $this->catalogResolver = $catalogResolver;
     }

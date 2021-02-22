@@ -23,6 +23,7 @@
         <service id="bitbag.resolver.catalog.product_resource" class="BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch\ProductsInsideCatalogResolver">
             <argument type="service" id="bitbag.sylius_catalog_plugin.query_builder.product_query_builder" />
             <argument type="service" id="fos_elastica.finder.bitbag_shop_product.default" />
+            <argument type="service" id="bitbag_sylius_catalog_plugin.registry_catalog_sort_checker.elasticsearch" />
         </service>
 
         <service id="bitbag.resolver.catalog.product_catalog_resolver" class="BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch\CatalogsForProductResolver">
@@ -53,22 +54,30 @@
         </service>
 
         <service id="bitbag_sylius_catalog_plugin.catalog_sort_checker.elasticsearch.by_price" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch\CheapestSort">
+            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.channel_pricing"/>
+            <argument type="service" id="sylius.context.shopper"/>
             <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="cheapest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.cheapest" />
         </service>
 
         <service id="bitbag_sylius_catalog_plugin.checker.sort.elasticsearch.most_expensive_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch\MostExpensiveSort">
+            <argument type="service" id="bitbag_sylius_elasticsearch_plugin.property_name_resolver.channel_pricing"/>
+            <argument type="service" id="sylius.context.shopper"/>
             <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="most_expensive" label="bitbag_sylius_catalog_plugin.ui.form.catalog.most_expensive" />
+
         </service>
 
         <service id="bit_bag.sylius_catalog_plugin.checker.sort.elasticsearch.newest_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch\NewestSort">
+            <argument>%bitbag_es_shop_product_created_at%</argument>
             <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="newest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.newest" />
         </service>
 
         <service id="bitbag_sylius_catalog_plugin.checker.sort.elasticsearch.oldest_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch\OldestSort">
+            <argument>%bitbag_es_shop_product_created_at%</argument>
             <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="oldest" label="bitbag_sylius_catalog_plugin.ui.form.catalog.oldest" />
         </service>
 
         <service id="bit_bag_sylius_catalog_plugin.checker.sort.elasticsearch.sold_units_sort" class="BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch\SoldUnitsSort">
+            <argument>%bitbag_es_shop_product_sold_units%</argument>
             <tag name="bitbag_sylius_catalog_plugin.catalog_sort_checker" type="bestsellers" label="bitbag_sylius_catalog_plugin.ui.form.catalog.bestsellers" />
         </service>
     </services>

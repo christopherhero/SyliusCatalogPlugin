@@ -11,11 +11,24 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch;
 
-use Elastica\Query\AbstractQuery;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
 
 final class OldestSort implements SortInterface
 {
-    public function modifyQueryBuilder(array $configuration): AbstractQuery
+    /** @var string */
+    private $productCreatedAdProperty;
+
+    public function __construct(string $productCreatedAdProperty)
     {
+        $this->productCreatedAdProperty = $productCreatedAdProperty;
+    }
+
+    public function modifyQueryBuilder(BoolQuery $boolQuery): Query
+    {
+        $query = new Query($boolQuery);
+        $query->addSort([$this->productCreatedAdProperty => self::ASC]);
+
+        return $query;
     }
 }

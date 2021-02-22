@@ -11,11 +11,37 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch;
 
-use Elastica\Query\AbstractQuery;
+use BitBag\SyliusElasticsearchPlugin\PropertyNameResolver\ConcatedNameResolverInterface;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class MostExpensiveSort implements SortInterface
 {
-    public function modifyQueryBuilder(array $configuration): AbstractQuery
+    /** @var ConcatedNameResolverInterface */
+    private $channelPricingNameResolver;
+
+    /** @var ChannelContextInterface */
+    private $channelContext;
+
+    public function __construct(
+        ConcatedNameResolverInterface $channelPricingNameResolver,
+        ChannelContextInterface $channelContext
+    ) {
+        $this->channelPricingNameResolver = $channelPricingNameResolver;
+        $this->channelContext = $channelContext;
+    }
+
+    public function modifyQueryBuilder(BoolQuery $boolQuery): Query
     {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+        $propertyName = $this->channelPricingNameResolver->resolvePropertyName($channel->getCode());
+
+        $query = new Query($boolQuery);
+        $query->addSort([$propertyName => self::DESC]);
+
+        return $query;
     }
 }

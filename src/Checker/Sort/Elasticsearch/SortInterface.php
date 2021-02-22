@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Checker\Sort\Elasticsearch;
 
-use Elastica\Query\AbstractQuery;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
 
 interface SortInterface
 {
@@ -19,5 +20,5 @@ interface SortInterface
 
     public const ASC = 'ASC';
 
-    public function modifyQueryBuilder(array $configuration): AbstractQuery;
+    public function modifyQueryBuilder(BoolQuery $boolQuery): Query;
 }

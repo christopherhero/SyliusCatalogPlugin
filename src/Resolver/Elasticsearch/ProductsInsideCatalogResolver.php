@@ -11,14 +11,16 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Resolver\Elasticsearch;
 
+use BitBag\SyliusCatalogPlugin\Checker\Sort\Doctrine\SortInterface;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\QueryBuilder\ProductQueryBuilderInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductResolverInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Elastica\Query\BoolQuery;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
+use Sylius\Component\Registry\ServiceRegistry;
 
-class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInterface
+final class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInterface
 {
     /** @var ProductQueryBuilderInterface */
     private $productQueryBuilder;
@@ -26,20 +28,31 @@ class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolverInte
     /** @var PaginatedFinderInterface */
     private $productFinder;
 
-    public function __construct(ProductQueryBuilderInterface $productQueryBuilder, PaginatedFinderInterface $paginatedFinder)
-    {
+    /** @var ServiceRegistry */
+    private $sortServiceRegistry;
+
+    public function __construct(
+        ProductQueryBuilderInterface $productQueryBuilder,
+        PaginatedFinderInterface $paginatedFinder,
+        ServiceRegistry $sortServiceRegistry
+    ) {
         $this->productQueryBuilder = $productQueryBuilder;
         $this->productFinder = $paginatedFinder;
+        $this->sortServiceRegistry = $sortServiceRegistry;
     }
 
     public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $query = new BoolQuery();
+        
         if ($catalog->getRules()->count()) {
             $query = $this->productQueryBuilder->findMatchingProductsQuery($catalog->getConnectingRules(), $catalog->getRules());
+            /** @var SortInterface $sortChecker */
+            $sortChecker = $this->sortServiceRegistry->get($catalog->getSortingType());
+            $query = $sortChecker->modifyQueryBuilder($query);
         }
 
-        $products = $this->productFinder->find($query, 1000);
+        $products = $this->productFinder->find($query, $catalog->getDisplayProducts());
 
         return $products;
     }

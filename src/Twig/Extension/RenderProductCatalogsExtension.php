@@ -11,9 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Twig\Extension;
 
-use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolverInterface;
-use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Twig\Extension\AbstractExtension;
