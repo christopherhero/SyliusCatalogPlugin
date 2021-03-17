@@ -44,13 +44,14 @@ final class ProductsInsideCatalogResolver implements ProductsInsideCatalogResolv
     public function findMatchingProducts(CatalogInterface $catalog): array
     {
         $query = new BoolQuery();
-        
+
         if ($catalog->getRules()->count()) {
             $query = $this->productQueryBuilder->findMatchingProductsQuery($catalog->getConnectingRules(), $catalog->getRules());
-            /** @var SortInterface $sortChecker */
-            $sortChecker = $this->sortServiceRegistry->get($catalog->getSortingType());
-            $query = $sortChecker->modifyQueryBuilder($query);
         }
+
+        /** @var SortInterface $sortChecker */
+        $sortChecker = $this->sortServiceRegistry->get($catalog->getSortingType());
+        $query = $sortChecker->modifyQueryBuilder($query);
 
         $products = $this->productFinder->find($query, $catalog->getDisplayProducts());
 
