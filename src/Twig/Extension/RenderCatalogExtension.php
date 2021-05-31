@@ -14,23 +14,20 @@ namespace BitBag\SyliusCatalogPlugin\Twig\Extension;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\CatalogResourceResolverInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class RenderCatalogExtension extends AbstractExtension
 {
-    /** @var EngineInterface */
-    private $engine;
+    private Environment $engine;
 
-    /** @var CatalogResourceResolverInterface */
-    private $catalogResolver;
+    private CatalogResourceResolverInterface $catalogResolver;
 
-    /** @var ProductsInsideCatalogResolverInterface */
-    private $productResolver;
+    private ProductsInsideCatalogResolverInterface $productResolver;
 
     public function __construct(
-        EngineInterface $engine,
+        Environment $engine,
         CatalogResourceResolverInterface $catalogResolver,
         ProductsInsideCatalogResolverInterface $productResolver
     ) {

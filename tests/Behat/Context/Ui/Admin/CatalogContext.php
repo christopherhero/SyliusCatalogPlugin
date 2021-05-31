@@ -7,41 +7,34 @@
 * an email on hello@bitbag.io.
 */
 
-
 declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusCatalogPlugin\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
-use Sylius\Behat\NotificationType;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\BitBag\SyliusCatalogPlugin\Behat\Page\Admin\Catalog\CreatePageInterface;
-use Tests\BitBag\SyliusCatalogPlugin\Behat\Page\Admin\Catalog\UpdatePageInterface;
 use Tests\BitBag\SyliusCatalogPlugin\Behat\Page\Admin\Catalog\IndexPageInterface;
+use Tests\BitBag\SyliusCatalogPlugin\Behat\Page\Admin\Catalog\UpdatePageInterface;
 
 final class CatalogContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var CurrentPageResolverInterface */
-    private $currentPageResolver;
+    private CurrentPageResolverInterface $currentPageResolver;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
+    private NotificationCheckerInterface $notificationChecker;
 
-    /** @var IndexPageInterface */
-    private $indexPage;
+    private IndexPageInterface $indexPage;
 
-    /** @var CreatePageInterface */
-    private $createPage;
+    private CreatePageInterface $createPage;
 
-    /** @var UpdatePageInterface */
-    private $updatePage;
+    private UpdatePageInterface $updatePage;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,

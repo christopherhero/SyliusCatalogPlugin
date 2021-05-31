@@ -13,20 +13,18 @@ namespace BitBag\SyliusCatalogPlugin\Twig\Extension;
 
 use BitBag\SyliusCatalogPlugin\Resolver\CatalogsForProductResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class RenderProductCatalogsExtension extends AbstractExtension
 {
-    /** @var EngineInterface */
-    private $engine;
+    private Environment $engine;
 
-    /** @var CatalogsForProductResolverInterface */
-    private $productCatalogResolver;
+    private CatalogsForProductResolverInterface $productCatalogResolver;
 
     public function __construct(
-        EngineInterface $engine,
+        Environment $engine,
         CatalogsForProductResolverInterface $productCatalogResolver
         ) {
         $this->engine = $engine;
@@ -48,7 +46,7 @@ final class RenderProductCatalogsExtension extends AbstractExtension
                 'catalogs' => $this->productCatalogResolver->resolveProductCatalogs(
                     $product,
                     new \DateTimeImmutable($date ?? 'now')
-                )
+                ),
             ]
         );
     }

@@ -11,43 +11,48 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusCatalogPlugin\Controller\Shop;
 
+use BitBag\SyliusCatalogPlugin\Entity\CatalogInterface;
 use BitBag\SyliusCatalogPlugin\Resolver\ProductsInsideCatalogResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Environment;
 
 final class ShowCatalogAction
 {
-    /** @var EngineInterface */
-    private $templatingEngine;
+    private Environment $twig;
 
-    /** @var RepositoryInterface */
-    private $catalogRepository;
+    private RepositoryInterface $catalogRepository;
 
-    /** @var ProductResolverInterface */
-    private $productResolver;
+    private ProductsInsideCatalogResolverInterface $productResolver;
 
     public function __construct(
         RepositoryInterface $catalogRepository,
         ProductsInsideCatalogResolverInterface $productResolver,
-        EngineInterface $templatingEngine
+        Environment $twig
     ) {
-        $this->templatingEngine = $templatingEngine;
+        $this->twig = $twig;
         $this->catalogRepository = $catalogRepository;
         $this->productResolver = $productResolver;
     }
 
     public function __invoke(Request $request): Response
     {
+        /** @var CatalogInterface|null $catalog */
         $catalog = $this->catalogRepository->findOneBy(['code' => $request->get('code')]);
+
+        if (null === $catalog) {
+            throw new NotFoundHttpException();
+        }
+
         $products = $this->productResolver->findMatchingProducts($catalog);
 
         $template = $request->get('template');
 
-        return $this->templatingEngine->renderResponse($template, [
+        return new Response($this->twig->render($template, [
             'catalog' => $catalog,
             'products' => $products,
-        ]);
+        ]));
     }
 }
