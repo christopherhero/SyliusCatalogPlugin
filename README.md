@@ -20,11 +20,11 @@ At BitBag we do believe in open source. However, we are able to do it just becau
 * [Overview](#overview)
 * [Installation](doc/installation.md)
     * [Testing & running the plugin](doc/installation.md#testing--running-the-plugin)
-* [Usage]($usage)
+* [Usage](#usage)
 * [Support](#we-are-here-to-help)
 * [About us](#about-us)
     * [Community](#community)
-* [Demo Sylius shop](#demo-sylius-shop)
+* [Demo Sylius Shop](#demo-sylius-shop)
 * [Additional Sylius resources for developers](#additional-resources-for-developers)
 * [License](#license)
 * [Contact](#contact)
@@ -95,12 +95,13 @@ If you need some help with Sylius development, don't be hesitate to contact us d
 ----
 For online communication, we invite you to chat with us & other users on [Sylius Slack](https://sylius-devs.slack.com/).
 
-# Demo Sylius shop
+# Demo Sylius Shop
 
 ---
 
 We created a demo app with some useful use-cases of plugins!
-Visit b2b.bitbag.shop to take a look at it. The admin can be accessed under b2b.bitbag.shop/admin/login link and sylius: sylius credentials.
+Visit [sylius-demo.bitbag.io](https://sylius-demo.bitbag.io/) to take a look at it. The admin can be accessed under
+[sylius-demo.bitbag.io/admin/login](https://sylius-demo.bitbag.io/admin/login) link and `sylius: sylius` credentials.
 Plugins that we have used in the demo:
 
 | BitBag's Plugin | GitHub | Sylius' Store|
