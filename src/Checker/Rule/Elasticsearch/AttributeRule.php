@@ -30,8 +30,7 @@ final class AttributeRule implements RuleInterface
         StringFormatterInterface $stringFormatter,
         LocaleContextInterface $localeContext,
         ConcatedNameResolverInterface $attributeNameResolver
-    )
-    {
+    ) {
         $this->stringFormatter = $stringFormatter;
         $this->localeContext = $localeContext;
         $this->attributeNameResolver = $attributeNameResolver;

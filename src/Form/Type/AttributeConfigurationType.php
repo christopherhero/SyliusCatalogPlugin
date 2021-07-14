@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\Type;
 
 final class AttributeConfigurationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('attribute', AttributeAutocompleteChoiceType::class, [

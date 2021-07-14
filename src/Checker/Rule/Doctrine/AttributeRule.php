@@ -18,7 +18,7 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-class AttributeRule extends AbstractRule implements AttributeRuleInterface
+final class AttributeRule extends AbstractRule implements AttributeRuleInterface
 {
     private int $i = 0;
 
